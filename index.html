@@ -1,115 +1,995 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<script>
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault();
-});
-</script>
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ROBLOX </title>
-    <link rel="icon" href="https://sf-tb-sg.ibytedtos.com/obj/eden-sg/uhtyvueh7nulogpoguhm/tiktok-icon2.png" type="image/x-icon">
-    <style>
-        body {
-            display: flex;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rematch Mobile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1a237e 30%, #d50000 70%);
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      min-height: 100vh;
+      direction: ltr; /* Left-to-right for English */
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-bottom: 60px;
+    }
+    .title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ff5252, #2962ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .subtitle {
+      text-align: center;
+      color: #e0e0e0;
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .trustbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px;
+      margin: 20px 0;
+      backdrop-filter: blur(6px);
+      font-weight: bold;
+    }
+    .trustbar i {
+      font-size: 18px;
+      color: #2962ff;
+      margin-right: 8px; /* Adjusted for LTR */
+      margin-left: 0;
+    }
+    .trustbar span {
+      color: #f1f5f9;
+      font-size: 14px;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .game-image {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      display: block;
+      border-radius: 16px;
+      border: 2px solid #2962ff;
+    }
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .btn {
+      background: linear-gradient(90deg, #d50000, #b71c1c);
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .btn-apple {
+      background: linear-gradient(90deg, #2962ff, #1a237e);
+    }
+    .slideshow-container {
+      position: relative;
+      margin: 30px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255,255,255,0.05);
+    }
+    .slide {
+      display: none;
+      position: relative;
+    }
+    .slide.active {
+      display: block;
+    }
+    .slide img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #2962ff;
+    }
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0; /* Adjusted for LTR */
+      right: auto;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 20px;
+      color: white;
+      text-align: left; /* Adjusted for LTR */
+    }
+    .slide-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #82b1ff;
+    }
+    .slide-description {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 0 5px 5px 0; /* Adjusted for LTR */
+      transition: background 0.3s;
+      z-index: 10;
+    }
+    .prev {
+      left: 0; /* Adjusted for LTR */
+      right: auto;
+      border-radius: 0 5px 5px 0; /* Adjusted for LTR */
+    }
+    .next {
+      right: 0; /* Adjusted for LTR */
+      left: auto;
+      border-radius: 5px 0 0 5px; /* Adjusted for LTR */
+    }
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    .dots-container {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .dot.active, .dot:hover {
+      background-color: #2962ff;
+    }
+    /* Chat specific styles */
+    .live-chat {
+        background: #1a202c;
+        margin: 40px 0 20px 0;
+        border-radius: 12px;
+        padding: 15px;
+        border: 1px solid #4a5568;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .chat-title {
+        color: #a7f3d0;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .online-count {
+        background: rgba(167, 243, 208, 0.1);
+        color: #a7f3d0;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+    .chat-messages {
+        height: 200px;
+        overflow-y: auto;
+        text-align: left; /* Adjusted for LTR */
+        margin-bottom: 15px;
+        padding-right: 10px; /* Adjusted for LTR */
+        padding-left: 0;
+        scrollbar-width: thin;
+        scrollbar-color: #a7f3d0 #2d3748;
+    }
+    .chat-messages::-webkit-scrollbar {
+        width: 8px;
+    }
+    .chat-messages::-webkit-scrollbar-track {
+        background: #2d3748;
+        border-radius: 10px;
+    }
+    .chat-messages::-webkit-scrollbar-thumb {
+        background-color: #a7f3d0;
+        border-radius: 10px;
+        border: 2px solid #2d3748;
+    }
+    .message {
+        margin-bottom: 12px;
+    }
+    .user {
+        color: #63b3ed;
+        font-weight: bold;
+        margin-right: 5px; /* Adjusted for LTR */
+        margin-left: 0;
+    }
+    .message-time {
+        color: #aaa;
+        font-size: 12px;
+        margin-left: 5px; /* Adjusted for LTR */
+        margin-right: 0;
+    }
+    .message-text {
+        margin-top: 3px;
+        line-height: 1.4;
+    }
+    .chat-input {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-direction: row; /* Adjusted for LTR input */
+    }
+    #chat-message {
+        flex: 1;
+        padding: 12px 15px;
+        border-radius: 20px;
+        border: none;
+        background: #2d3748;
+        color: white;
+        font-size: 14px;
+        min-height: 20px;
+        height: 40px;
+        resize: none;
+        text-align: left; /* Adjusted for LTR */
+    }
+    #send-message {
+        background: #a7f3d0;
+        color: #1a202c;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        height: 40px;
+        font-size: 14px;
+        width: auto;
+        flex-shrink: 0;
+        transition: all 0.3s;
+    }
+    #send-message:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(167, 243, 208, 0.3);
+    }
+
+    /* Game description style */
+    .game-description {
+      margin: 30px 0;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #1e293b;
+      color: #f9fafb;
+      border: 1px solid #334155;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      text-align: left; /* Adjusted for LTR */
+    }
+    .game-description h2 {
+        font-size: 26px;
+        font-weight: bold;
+        color: #60a5fa;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .game-description p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+    .game-description strong {
+        color: #a7f3d0;
+    }
+
+    /* Fixed footer position */
+    .legal {
+      font-size: 11px;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+    .legal a {
+      color: #82b1ff;
+      text-decoration: underline;
+    }
+
+    /* Content Locker Styles */
+    .locker-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .locker-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .locker-content {
+      background: linear-gradient(135deg, #1f2a40, #0f172a);
+      border: 2px solid #2962ff;
+      border-radius: 15px;
+      padding: 30px 20px;
+      max-width: 95%;
+      width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: fadeInScale 0.4s ease-out forwards;
+      box-sizing: border-box;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    @keyframes fadeInScale {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .locker-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-direction: row; /* For LTR */
+    }
+    .locker-logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid #d50000;
+      flex-shrink: 0;
+    }
+    .locker-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #82b1ff;
+      text-shadow: 0 0 8px rgba(130, 177, 255, 0.5);
+      line-height: 1.3;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .locker-message {
+      font-size: 17px;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: center; /* Centered for LTR */
+    }
+    .locker-message strong {
+      color: #a7f3d0;
+    }
+    .locker-message span.emoji {
+        font-size: 1.2em;
+        vertical-align: middle;
+        line-height: 1;
+    }
+
+    /* Offers List Styles (reverted to vertical, always red line) */
+    .locker-offers-list { /* Renamed from .offer-slideshow-container in previous version */
+      margin: 25px 0;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 10px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column; /* Vertical display */
+      gap: 10px; /* Spacing between offers */
+      position: relative; /* For the red line indicator (no longer dynamic) */
+    }
+
+    .offer-item {
+      background: rgba(255,255,255,0.08);
+      border-left: 5px solid #d50000; /* Always red border on left */
+      padding: 12px;
+      border-radius: 8px;
+      text-align: left;
+      transition: background 0.2s ease-in-out;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      cursor: pointer; /* Indicate clickable */
+    }
+    .offer-item:hover {
+      background: rgba(255,255,255,0.15);
+    }
+    /* Removed .active-offer class as all will have the red line */
+    /* Removed .active-indicator-line as each item has its own border */
+
+    .offer-item a {
+      color: #f1f5f9;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      font-size: 16px;
+      width: 100%;
+      text-align: left;
+    }
+    .offer-item a:hover {
+      color: #fff;
+    }
+    .offer-conversion {
+      font-size: 13px;
+      color: #a7f3d0;
+      margin-top: 5px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .locker-footer-message {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-top: 20px;
+      text-align: center; /* Centered for LTR */
+    }
+    .locker-footer-message strong {
+      color: #ffd600;
+    }
+    .close-locker {
+      position: absolute;
+      top: 15px;
+      right: 15px; /* Adjusted for LTR */
+      left: auto;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #e0e0e0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .close-locker:hover {
+      color: #ff5252;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #2962ff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1.2s linear infinite;
+      margin: 30px auto;
+      display: none;
+    }
+    .loading-spinner.active {
+      display: block;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Media queries for better responsiveness on small screens */
+    @media (max-width: 600px) {
+        .locker-content {
+            padding: 20px 15px;
+        }
+        .locker-title {
+            font-size: 22px;
+        }
+        .locker-message {
+            font-size: 15px;
+        }
+        .locker-header {
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            gap: 10px;
         }
-
-        #tiktok-logo {
-            width: 350px;
-            margin-bottom: 40px;
+        .locker-logo {
+            margin-bottom: 10px;
         }
-
-        #redirect-text {
-            font-size: 25px;
-            color: #000;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards, scaleUp 2s ease-in-out infinite alternate;
+        .offer-item a {
+            font-size: 15px;
         }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
+        .offer-conversion {
+            font-size: 12px;
         }
-
-        @keyframes scaleUp {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(1.2);
-            }
-        }
-
-        #openLink {
-            margin: 50px;
-            text-align: center;
-        }
-    </style>
-  
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT0Q5J83NE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LT0Q5J83NE');
-</script>
-<link rel="me" href="https://www.blogger.com/profile/14793448891675985468" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
-<link rel="me" href="https://www.blogger.com/profile/11716961538473495012" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
-<link rel="me" href="https://www.blogger.com/profile/01988508070568117560" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
-<link rel="me" href="https://www.blogger.com/profile/04613754307733837341" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+    }
+  </style>
 </head>
-
 <body>
-    <img id="tiktok-logo" src="https://d.top4top.io/p_3192yrfpp1.gif" alt="TikTok Logo">
-    <p id="redirect-text"></p>
-    <a href="#" id="openLink"></a>
+  <div class="container">
+    <h1 class="title">Rematch Mobile</h1>
+    <p class="subtitle">Exclusive Game • Unlocked Features • No Ads</p>
+    <div class="trustbar">
+      <div><i class="fas fa-lock"></i><span> Secure Download</span></div>
+      <div><i class="fas fa-check-circle"></i><span> Verified APK</span></div>
+      <div><i class="fas fa-shield-alt"></i><span> No Malware</span></div>
+    </div>
 
-    <script>
-        function openLinkBasedOnDevice(url) {
-            var userAgent = navigator.userAgent; 
+    <div class="card">
+      <img src="https://i.ibb.co/V0FtzNHF/tumblr-66d808e1e336f09e0daaf6e0c420fe28-cfc9feef-512.jpg" alt="Rematch Game" class="game-image">
+      <p style="text-align:center; margin-top: 15px; font-weight: bold;">Unlock the full game instantly! Get the best Rematch Mobile experience!</p>
+      <p style="text-align:center; color: #ffd600; font-weight: bold;">Complete one quick task to unlock the download</p>
 
-            if (/(android)/i.test(userAgent)) {
-                // If the device is Android, open the link in Chrome
-                window.location.href = 'intent://' + url.substring(url.indexOf("://") + 3) + '#Intent;scheme=http;package=com.android.chrome;end;';
-            } else if (/(iphone|ipad|ipod)/i.test(userAgent)) {
-                // If the device is iOS, open the link in Safari
-                window.location.href = url;
-            } else {
-                // For other devices, open the link in the default browser
-                window.location.href = url;
-            }
+      <div class="btn-container">
+        <button class="btn" onclick="showContentLocker()">Download for Android</button>
+        <button class="btn btn-apple" onclick="showContentLocker()">Download for iOS</button>
+      </div>
+    </div>
+
+    <div class="slideshow-container">
+      <div class="slide active">
+        <img src="https://i.ibb.co/HLXpSZQL/2.png" alt="Gameplay Screenshot 1">
+        <div class="slide-content">
+          <div class="slide-title">Dynamic Matches</div>
+          <div class="slide-description">Experience fast-paced 5v5 football action!</div>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://i.ibb.co/qYhLXnJ6/1.png" alt="Gameplay Screenshot 2">
+        <div class="slide-content">
+          <div class="slide-title">Stunning Graphics</div>
+          <div class="slide-description">Immersive 3D visuals on your mobile device.</div>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://i.ibb.co/4nLXkPwL/3.png" alt="Gameplay Screenshot 3">
+        <div class="slide-content">
+          <div class="slide-title">Intuitive Controls</div>
+          <div class="slide-description">Master passes, shots, and special moves effortlessly.</div>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="https://i.ibb.co/GvzTDhxY/4.png" alt="Gameplay Screenshot 4">
+        <div class="slide-content">
+          <div class="slide-title">Global Leaderboards</div>
+          <div class="slide-description">Compete with players worldwide and climb the ranks.</div>
+        </div>
+      </div>
+
+      <button class="prev" onclick="changeSlide(-1)">❮</button>
+      <button class="next" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <div class="dots-container">
+      <span class="dot active" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+
+    <div class="live-chat">
+        <div class="chat-header">
+            <div class="chat-title">Live Chat</div>
+            <div class="online-count">🔴 143 Online</div>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chat-message" placeholder="Type your message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+
+    <div class="game-description">
+      <h2>About Rematch Mobile</h2>
+      <p><strong>Rematch Mobile</strong> is a lightning-fast, skill-based football game inspired by the highly anticipated PC and console title, "Rematch." Dive into intense <strong>5v5 matches</strong> featuring polished <strong>3D graphics</strong> and <strong>intuitive controls</strong> that let you master passing, sprinting, shooting, and even in-game emotes! Each match is short, action-packed, and perfect for quick gaming sessions.</p>
+      <p>While the game currently offers engaging offline play against improved AI, an <strong>online multiplayer mode</strong> is launching soon, set to be a true game-changer! Climb the <strong>global leaderboard</strong> and showcase your abilities. This <strong>free-to-play</strong> title prioritizes <strong>player skill, timing, and strategic decisions</strong> over "pay-to-win" mechanics. Prepare for an addictive experience with stunning visuals!</p>
+    </div>
+
+    <div class="legal">
+      <p>Disclaimer: This is a fan-made landing page for promotional purposes only. We are not affiliated with the developers of Rematch. All content is for entertainment and marketing use.</p>
+      <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </div>
+
+  </div>
+
+  <div class="locker-overlay" id="contentLocker">
+    <div class="locker-content">
+      <button class="close-locker" onclick="hideContentLocker()">&times;</button>
+      <div class="locker-header">
+        <img src="https://i.ibb.co/V0FtzNHF/tumblr-66d808e1e336f09e0daaf6e0c420fe28-cfc9feef-512.jpg" alt="Rematch Mobile Logo" class="locker-logo">
+        <h2 class="locker-title">You're one step away from the Full Game! 🔓</h2>
+      </div>
+      <p class="locker-message">
+        Complete <strong style="color: #a7f3d0;">ONE quick, guaranteed task</strong> from the list below to get instant access.
+        This supports our team and keeps the game free for everyone! 🚀
+      </p>
+
+      <div class="loading-spinner" id="lockerSpinner"></div>
+
+      <div class="locker-offers-list" id="lockerOffersList" style="display: none;">
+        </div>
+      
+      <p class="locker-footer-message">
+        Your download will start <strong style="color: #ffd600;">automatically</strong> after successful completion.
+        Don't worry, it's 100% free and guaranteed! ✨
+      </p>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    // Ensure jQuery is loaded before proceeding
+    if (typeof jQuery == 'undefined') {
+        console.error("jQuery is not loaded! Some functionalities might not work.");
+    } else {
+        console.log("jQuery is loaded.");
+    }
+
+    let slideIndex = 1;
+    showSlide(slideIndex);
+
+    function changeSlide(n) {
+      showSlide(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlide(slideIndex = n);
+    }
+
+    function showSlide(n) {
+      let slides = document.getElementsByClassName("slide");
+      let dots = document.getElementsByClassName("dot");
+
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+      }
+
+      if (slides[slideIndex-1]) slides[slideIndex-1].classList.add("active");
+      if (dots[slideIndex-1]) dots[slideIndex-1].classList.add("active");
+    }
+
+    // Auto-advance slides every 5 seconds
+    setInterval(function() {
+      changeSlide(1);
+    }, 5000);
+
+    // --- Chat JavaScript ---
+    const firstNames = [
+        "Alex", "Blaze", "Crypto", "Dragon", "Epic", "Fang", "Ghost", "Havoc", "Jade", "Krypto",
+        "Lunar", "Mystic", "Neon", "Omega", "Phantom", "Quantum", "Rogue", "Stealth", "Titan", "Vortex",
+        "Ace", "Bandit", "Cosmo", "Dash", "Echo", "Flare", "Grim", "Hex", "Ice", "Jinx",
+        "Kai", "Lux", "Mako", "Nova", "Onyx", "Pax", "Quill", "Rift", "Sage", "Talon",
+        "Umbra", "Vex", "Wraith", "Xeno", "Yuri", "Zane", "Ash", "Bolt", "Cinder", "Dusk"
+    ];
+    const lastInitials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const versions = ["Standard", "Premium", "Pro"];
+
+    const uniqueUsernames = [];
+    for (let i = 0; i < 200; i++) {
+        const firstName = firstNames[i % firstNames.length];
+        const lastInitial = lastInitials[Math.floor(Math.random() * lastInitials.length)];
+        uniqueUsernames.push(`${firstName} ${lastInitial}.`);
+    }
+
+    function getTimeAgo(minutesAgo) {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - minutesAgo);
+        return formatTime(now);
+    }
+
+    function formatTime(date) {
+        let hours = date.getHours();
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        return `${hours}:${minutes} ${ampm}`;
+    }
+
+    const chatMessages = [];
+    const now = new Date();
+    const totalMessages = 200;
+
+    // Improved chat messages focused on football game experience
+    const footballTerms = ["goal", "assist", "tackle", "dribble", "shot", "save", "pass", "cross", "header", "volley"];
+    const skillLevels = ["beginner", "intermediate", "advanced", "pro", "expert"];
+    const positions = ["striker", "midfielder", "defender", "goalkeeper", "winger"];
+
+    for (let i = 0; i < totalMessages; i++) {
+        const username = uniqueUsernames[i];
+        const minutesAgo = Math.floor((i / totalMessages) * 120);
+        const time = getTimeAgo(minutesAgo);
+
+        const footballTerm = footballTerms[Math.floor(Math.random() * footballTerms.length)];
+        const skillLevel = skillLevels[Math.floor(Math.random() * skillLevels.length)];
+        const position = positions[Math.floor(Math.random() * positions.length)];
+
+        const messageTemplates = [
+            `Just scored an amazing ${footballTerm}! This game's physics are incredible! ⚽`,
+            `The ${position} controls are so smooth in Rematch Mobile! Best football game ever!`,
+            `Anyone else struggling with ${footballTerm} at ${skillLevel} level? Need tips!`,
+            `My ${position} skills have improved so much playing this game! 🔥`,
+            `Can't stop playing Rematch Mobile! The ${footballTerm} mechanics are perfect!`,
+            `Just had an epic match with 5 ${footballTerm}s! This game is addictive!`,
+            `The ${position} AI is so smart in this game! Really challenges you to improve.`,
+            `How do you perform the special ${footballTerm} move? Can't figure it out!`,
+            `Rematch Mobile has the best ${position} gameplay I've experienced on mobile!`,
+            `After 50 matches, I finally mastered the ${footballTerm} technique! So satisfying!`,
+            `The ${position} controls are so responsive! Makes scoring ${footballTerm}s so rewarding!`,
+            `Just reached ${skillLevel} level! This game keeps getting better the more you play!`,
+            `Anyone want to share their best ${position} strategies? Looking to improve my game!`,
+            `The way the ball moves during a ${footballTerm} is so realistic! Amazing physics!`,
+            `Can't believe this is free! The ${position} animations are console quality!`
+        ];
+
+        chatMessages.push({
+            name: username,
+            time: time,
+            text: messageTemplates[Math.floor(Math.random() * messageTemplates.length)],
+            timestamp: new Date(now.getTime() - minutesAgo * 60000)
+        });
+    }
+
+    chatMessages.sort((a, b) => a.timestamp - b.timestamp);
+
+    function addChatMessage(message) {
+        const chatContainer = document.getElementById('chat-messages');
+        if (!chatContainer) {
+            console.error("Chat container not found!");
+            return;
+        }
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message';
+        messageElement.innerHTML = `
+            <div>
+                <span class="user">${message.name}</span>
+                <span class="message-time">${message.time}</span>
+            </div>
+            <div class="message-text">${message.text}</div>
+        `;
+        chatContainer.appendChild(messageElement);
+
+        if (chatContainer.children.length > 15) {
+            chatContainer.removeChild(chatContainer.children[0]);
         }
 
-       // Automatically execute the function after a 0.05-second delay
-setTimeout(function () {
-    var url = 'https://rematch-mobile25.netlify.app/'; // تم تغيير الرابط هنا
-    openLinkBasedOnDevice(url);
-}, 50); // 50 milliseconds = 0.05 seconds
-</script>
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function updateOnlineCount() {
+        const onlineCountElement = document.querySelector('.online-count');
+        if (!onlineCountElement) {
+            console.error("Online count element not found!");
+            return;
+        }
+        const onlineCount = 120 + Math.floor(Math.random() * 30);
+        onlineCountElement.textContent = `🔴 ${onlineCount} Online`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOM fully loaded, initializing chat...");
+        for (let i = 0; i < 5; i++) {
+            if (chatMessages[i]) addChatMessage(chatMessages[i]);
+        }
+
+        let messageIndex = 5;
+        const addNewMessage = () => {
+            if (messageIndex < chatMessages.length) {
+                const message = chatMessages[messageIndex];
+                if (message && message.timestamp <= new Date()) {
+                    addChatMessage({
+                        ...message,
+                        time: formatTime(message.timestamp)
+                    });
+                    messageIndex++;
+                }
+            }
+            setTimeout(addNewMessage, 1500 + Math.random() * 2500);
+        };
+
+        setTimeout(addNewMessage, 3000);
+        setInterval(updateOnlineCount, 15000);
+
+        const sendMessageButton = document.getElementById('send-message');
+        const chatMessageInput = document.getElementById('chat-message');
+
+        if (sendMessageButton && chatMessageInput) {
+            sendMessageButton.addEventListener('click', function() {
+                if (chatMessageInput.value.trim()) {
+                    addChatMessage({
+                        name: "You",
+                        time: formatTime(new Date()),
+                        text: chatMessageInput.value
+                    });
+                    chatMessageInput.value = '';
+
+                    setTimeout(() => {
+                        if (messageIndex < chatMessages.length) {
+                            const botMessage = chatMessages[messageIndex];
+                            if (botMessage) {
+                                addChatMessage({
+                                    ...botMessage,
+                                    time: formatTime(botMessage.timestamp)
+                                });
+                                messageIndex++;
+                            }
+                        }
+                    }, 750 + Math.random() * 1500);
+                }
+            });
+
+            chatMessageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    sendMessageButton.click();
+                }
+            });
+        } else {
+            console.error("Send message button or chat input not found.");
+        }
+    });
+
+
+    // --- Content Locker JavaScript ---
+    const API_KEY_OFFERS = "4e2db9e379007942fc92050da3ab5461";
+    const USER_ID = "572120";
+
+    function showContentLocker() {
+      console.log("Attempting to show content locker...");
+      const lockerOverlay = document.getElementById('contentLocker');
+      const lockerSpinner = document.getElementById('lockerSpinner');
+      const lockerOffersList = document.getElementById('lockerOffersList');
+
+      if (!lockerOverlay || !lockerSpinner || !lockerOffersList) {
+          console.error("One or more locker elements not found!");
+          return;
+      }
+
+      lockerOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      lockerSpinner.classList.add('active');
+      lockerOffersList.style.display = 'none';
+      lockerOffersList.innerHTML = ''; // Clear previous offers
+
+      setTimeout(() => {
+        fetchOffers();
+      }, 1500);
+    }
+
+    function hideContentLocker() {
+      console.log("Hiding content locker...");
+      const lockerOverlay = document.getElementById('contentLocker');
+      if (lockerOverlay) lockerOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function fetchOffers() {
+      console.log("Fetching offers...");
+      const lockerSpinner = document.getElementById('lockerSpinner');
+      const lockerOffersList = document.getElementById('lockerOffersList');
+
+      $.getJSON(`https://d3o07fqjkwc0s0.cloudfront.net/public/offers/feed.php?user_id=${USER_ID}&api_key=${API_KEY_OFFERS}&callback=?`)
+        .done(function(offersData) {
+          console.log("Offers fetched successfully:", offersData);
+          lockerSpinner.classList.remove('active');
+
+          let offers = offersData;
+          let html = '';
+
+          // Display exactly 3 offers
+          let numOffersToDisplay = Math.min(offers.length, 3); // LIMIT TO 3 OFFERS
+
+          if (numOffersToDisplay === 0) {
+              console.log("No offers returned by API.");
+              lockerOffersList.style.display = 'block';
+              lockerOffersList.innerHTML = '<p style="color: #ff5252; text-align: center;">No offers available at the moment. Please try again later! 🙁</p>';
+              return;
+          }
+
+          lockerOffersList.style.display = 'flex'; // Ensure list is flex column
+
+          $.each(offers.slice(0, numOffersToDisplay), function(index, offer) {
+            html += `
+              <div class="offer-item" data-offer-index="${index}">
+                <a href="${offer.url}" target="_blank" title="${offer.conversion}" onclick="handleOfferClick('${offer.offer_id}')">
+                  ${offer.anchor} <span style="font-size: 0.9em; opacity: 0.8;">(Start here)</span>
+                </a>
+                <div class="offer-conversion">${offer.conversion}</div>
+              </div>
+            `;
+          });
+          $(lockerOffersList).append(html); // Append offers to the list
+
+        })
+        .fail(function(jqxhr, textStatus, error) {
+            console.error("Request to offers API Failed: " + textStatus + ", " + error, jqxhr.responseText);
+            lockerSpinner.classList.remove('active');
+            lockerOffersList.style.display = 'block';
+            lockerOffersList.innerHTML = '<p style="color: #ff5252; text-align: center;">Error loading offers. Please check your API key or network connection. ⚠️</p>';
+        });
+    }
+
+    function handleOfferClick(offerId) {
+        console.log(`User clicked on offer ID: ${offerId}`);
+        // No dynamic active line logic needed here as all offers have the red line.
+        // In a real scenario, you would start checking for lead completion here.
+        // For demonstration, we'll just log it.
+        // You might want to hide the locker or show a "waiting for completion" message.
+
+        // Example of checking for lead completion (uncomment and integrate with your backend)
+        // setInterval(checkLeads, 15000); // Check for leads every 15 seconds after an offer is clicked
+    }
+
+    function checkLeads() {
+        console.log("Checking for leads...");
+        $.getJSON("https://d3o07fqjkwc0s0.cloudfront.net/public/external/check2.php?testing=0&callback=?",
+            function (leads) {
+                var completed_leads = leads.length;
+                if (completed_leads) {
+                    var offer_ids = [];
+                    var earnings_in_cents = 0;
+                    $.each(leads, function (key, lead) {
+                        offer_ids.push(parseInt(lead.offer_id));
+                        earnings_in_cents += parseFloat(lead.points);
+                        console.log("Single lead on offer id " + lead.offer_id + " for  $" + (parseFloat(lead.points) / 100).toFixed(2));
+                    });
+                    console.log("SUMMARY: User has completed " + completed_leads + " leads, for $" + (earnings_in_cents / 100) + " earnings, on offer ids: " + offer_ids.join(","));
+
+                    alert("Congratulations! Your Rematch Mobile download will now begin! 🎉");
+                    hideContentLocker();
+                    // window.location.href = "YOUR_GAME_DOWNLOAD_LINK_HERE";
+                }
+                else {
+                    console.log("No leads were found yet.");
+                }
+            })
+            .fail(function(jqxhr, textStatus, error) {
+                console.error("Request to check leads API Failed: " + textStatus + ", " + error, jqxhr.responseText);
+            });
+    }
+  </script>
 </body>
 </html>
