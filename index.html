@@ -333,7 +333,7 @@
       text-decoration: underline;
     }
 
-    /* Content Locker Styles */
+    /* --- Universal Locker Overlay Styles --- */
     .locker-overlay {
       position: fixed;
       top: 0;
@@ -356,7 +356,7 @@
       visibility: visible;
     }
     .locker-content {
-      background: linear-gradient(135deg, #1f2a40, #0f172a);
+      background: linear-gradient(135deg, #1a237e 30%, #d50000 70%); /* Consistent with body */
       border: 2px solid #2962ff;
       border-radius: 15px;
       padding: 30px 20px;
@@ -369,117 +369,16 @@
       box-sizing: border-box;
       max-height: 90vh;
       overflow-y: auto;
+      color: #fff; /* Ensure text is white */
     }
     @keyframes fadeInScale {
       from { transform: scale(0.9); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    .locker-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 25px;
-      flex-direction: row; /* For LTR */
-    }
-    .locker-logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      border: 2px solid #d50000;
-      flex-shrink: 0;
-    }
-    .locker-title {
-      font-size: 26px;
-      font-weight: 700;
-      color: #82b1ff;
-      text-shadow: 0 0 8px rgba(130, 177, 255, 0.5);
-      line-height: 1.3;
-      text-align: center;
-      flex-grow: 1;
-    }
-    .locker-message {
-      font-size: 17px;
-      color: #e0e0e0;
-      margin-bottom: 20px;
-      line-height: 1.6;
-      text-align: center; /* Centered for LTR */
-    }
-    .locker-message strong {
-      color: #a7f3d0;
-    }
-    .locker-message span.emoji {
-        font-size: 1.2em;
-        vertical-align: middle;
-        line-height: 1;
-    }
-
-    /* Offers List Styles (reverted to vertical, always red line) */
-    .locker-offers-list { /* Renamed from .offer-slideshow-container in previous version */
-      margin: 25px 0;
-      border-radius: 10px;
-      background: rgba(0,0,0,0.15);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      padding: 10px;
-      min-height: 150px;
-      display: flex;
-      flex-direction: column; /* Vertical display */
-      gap: 10px; /* Spacing between offers */
-      position: relative; /* For the red line indicator (no longer dynamic) */
-    }
-
-    .offer-item {
-      background: rgba(255,255,255,0.08);
-      border-left: 5px solid #d50000; /* Always red border on left */
-      padding: 12px;
-      border-radius: 8px;
-      text-align: left;
-      transition: background 0.2s ease-in-out;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      cursor: pointer; /* Indicate clickable */
-    }
-    .offer-item:hover {
-      background: rgba(255,255,255,0.15);
-    }
-    /* Removed .active-offer class as all will have the red line */
-    /* Removed .active-indicator-line as each item has its own border */
-
-    .offer-item a {
-      color: #f1f5f9;
-      text-decoration: none;
-      font-weight: bold;
-      display: block;
-      font-size: 16px;
-      width: 100%;
-      text-align: left;
-    }
-    .offer-item a:hover {
-      color: #fff;
-    }
-    .offer-conversion {
-      font-size: 13px;
-      color: #a7f3d0;
-      margin-top: 5px;
-      width: 100%;
-      text-align: left;
-    }
-
-    .locker-footer-message {
-      font-size: 14px;
-      color: #94a3b8;
-      margin-top: 20px;
-      text-align: center; /* Centered for LTR */
-    }
-    .locker-footer-message strong {
-      color: #ffd600;
-    }
     .close-locker {
       position: absolute;
       top: 15px;
-      right: 15px; /* Adjusted for LTR */
-      left: auto;
+      right: 15px;
       background: none;
       border: none;
       font-size: 24px;
@@ -491,10 +390,232 @@
       color: #ff5252;
     }
 
+    /* --- Size Selection Locker Styles --- */
+    #sizeSelectionLocker {
+      /* This overlay will be identical to .locker-overlay */
+    }
+    .size-selection-content {
+        /* Background and border from .locker-content */
+        background: linear-gradient(135deg, #1a237e 30%, #d50000 70%);
+        border: 2px solid #2962ff;
+        border-radius: 15px;
+        padding: 30px 20px;
+        max-width: 95%;
+        width: 500px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        position: relative;
+        box-sizing: border-box;
+        max-height: 90vh;
+        overflow-y: auto;
+        color: #fff;
+    }
+    .size-selection-header {
+        margin-bottom: 25px;
+    }
+    .size-selection-header h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #82b1ff; /* Light blue from page */
+        text-shadow: 0 0 8px rgba(130, 177, 255, 0.5);
+        margin-bottom: 10px;
+    }
+    .size-selection-header p {
+        font-size: 16px;
+        color: #e0e0e0;
+        line-height: 1.6;
+    }
+    .size-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 25px;
+    }
+    .size-option-card {
+        background: rgba(255,255,255,0.08); /* Semi-transparent background */
+        border: 1px solid #2962ff; /* Blue border */
+        border-radius: 12px;
+        padding: 15px 20px;
+        text-align: left;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .size-option-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(41,98,255,0.4);
+    }
+    .size-option-card .version-name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff5252; /* Red from page */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .size-option-card .details {
+        font-size: 14px;
+        color: #e0e0e0;
+        margin-left: 30px; /* Indent details */
+    }
+    .size-option-card .download-btn {
+        background: linear-gradient(90deg, #00c853, #64dd17); /* Green button */
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+        transition: background 0.2s, transform 0.2s;
+        border: none;
+        cursor: pointer;
+    }
+    .size-option-card .download-btn:hover {
+        transform: scale(1.02);
+        background: linear-gradient(90deg, #00e676, #76ff03);
+    }
+
+    /* --- Offer Locker Styles (Consistent with page colors) --- */
+    #offerLocker {
+      /* This overlay will use the same styles as .locker-overlay */
+    }
+    .offer-locker-content {
+      /* Inherits from .locker-content */
+    }
+    .offer-locker-header {
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    .offer-locker-header h2 {
+        font-size: 26px;
+        font-weight: 700;
+        color: #82b1ff;
+        text-shadow: 0 0 8px rgba(130, 177, 255, 0.5);
+        margin-bottom: 10px;
+    }
+    .offer-locker-header p {
+        font-size: 16px;
+        color: #e0e0e0;
+        line-height: 1.6;
+    }
+    .offer-locker-header p strong {
+        color: #ffd600; /* Yellow for emphasis */
+    }
+    .locker-info-bar {
+        display: flex;
+        justify-content: space-around;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        padding: 10px;
+        margin: 20px 0;
+        backdrop-filter: blur(6px);
+        font-weight: bold;
+        font-size: 14px;
+        color: #f1f5f9;
+    }
+    .locker-info-bar div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .locker-info-bar i {
+        font-size: 16px;
+        color: #2962ff; /* Blue icon */
+    }
+
+    .locker-offers-list {
+      margin: 25px 0;
+      padding: 0;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+    }
+    .offer-item-card {
+        background: rgba(255,255,255,0.08);
+        border-left: 5px solid #d50000; /* Red consistent with page */
+        padding: 15px;
+        border-radius: 10px;
+        text-align: left;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .offer-item-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(213,0,0,0.3);
+    }
+    .offer-item-card .offer-title {
+        font-size: 17px;
+        font-weight: bold;
+        color: #f1f5f9;
+        margin-bottom: 5px;
+    }
+    .offer-item-card .offer-details-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .offer-item-card .offer-description {
+        font-size: 13px;
+        color: #bdbdbd;
+        flex-grow: 1;
+        margin-right: 10px; /* Space before points */
+    }
+    .offer-item-card .offer-points {
+        font-size: 14px;
+        font-weight: bold;
+        color: #a7f3d0; /* Green for points */
+        white-space: nowrap;
+    }
+    .offer-item-card .offer-action-btn {
+        background: linear-gradient(90deg, #2962ff, #1a237e); /* Blue consistent with page */
+        color: white;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: background 0.2s, transform 0.2s;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .offer-item-card .offer-action-btn:hover {
+        transform: scale(1.02);
+        background: linear-gradient(90deg, #448aff, #2979ff);
+    }
+
+    .locker-footer-message {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .locker-footer-message strong {
+      color: #ffd600;
+    }
     /* Loading Spinner */
     .loading-spinner {
       border: 6px solid #f3f3f3;
-      border-top: 6px solid #2962ff;
+      border-top: 6px solid #2962ff; /* Blue spinner */
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -512,27 +633,34 @@
 
     /* Media queries for better responsiveness on small screens */
     @media (max-width: 600px) {
-        .locker-content {
+        .locker-content, .size-selection-content {
             padding: 20px 15px;
+            width: 98%;
         }
-        .locker-title {
-            font-size: 22px;
+        .size-selection-header h2, .offer-locker-header h2 {
+            font-size: 24px;
         }
-        .locker-message {
-            font-size: 15px;
+        .size-selection-header p, .offer-locker-header p {
+            font-size: 14px;
         }
-        .locker-header {
+        .size-option-card .version-name {
+            font-size: 16px;
+        }
+        .size-option-card .details {
+            font-size: 13px;
+        }
+        .locker-info-bar {
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
-        .locker-logo {
-            margin-bottom: 10px;
+        .offer-item-card .offer-title {
+            font-size: 16px;
         }
-        .offer-item a {
-            font-size: 15px;
-        }
-        .offer-conversion {
+        .offer-item-card .offer-description {
             font-size: 12px;
+        }
+        .offer-item-card .offer-points {
+            font-size: 13px;
         }
     }
   </style>
@@ -550,11 +678,9 @@
     <div class="card">
       <img src="https://i.ibb.co/V0FtzNHF/tumblr-66d808e1e336f09e0daaf6e0c420fe28-cfc9feef-512.jpg" alt="Rematch Game" class="game-image">
       <p style="text-align:center; margin-top: 15px; font-weight: bold;">Unlock the full game instantly! Get the best Rematch Mobile experience!</p>
-      <p style="text-align:center; color: #ffd600; font-weight: bold;">Complete one quick task to unlock the download</p>
-
       <div class="btn-container">
-        <button class="btn" onclick="showContentLocker()">Download for Android</button>
-        <button class="btn btn-apple" onclick="showContentLocker()">Download for iOS</button>
+        <button class="btn" onclick="showSizeSelectionLocker()">Download for Android</button>
+        <button class="btn btn-apple" onclick="showSizeSelectionLocker()">Download for iOS</button>
       </div>
     </div>
 
@@ -627,29 +753,68 @@
 
   </div>
 
-  <div class="locker-overlay" id="contentLocker">
-    <div class="locker-content">
-      <button class="close-locker" onclick="hideContentLocker()">&times;</button>
-      <div class="locker-header">
-        <img src="https://i.ibb.co/V0FtzNHF/tumblr-66d808e1e336f09e0daaf6e0c420fe28-cfc9feef-512.jpg" alt="Rematch Mobile Logo" class="locker-logo">
-        <h2 class="locker-title">You're one step away from the Full Game! 🔓</h2>
+  <div class="locker-overlay" id="sizeSelectionLocker">
+    <div class="size-selection-content">
+      <button class="close-locker" onclick="hideSizeSelectionLocker()">&times;</button>
+      <div class="size-selection-header">
+        <h2>Choose Your Rematch Mobile Download! 🚀</h2>
+        <p>Select your preferred game version below. The smaller the size, the quicker the unlock! 💪</p>
       </div>
-      <p class="locker-message">
-        Complete <strong style="color: #a7f3d0;">ONE quick, guaranteed task</strong> from the list below to get instant access.
-        and download the game smoothly and quickly! 🚀
-      </p>
 
-      <div class="loading-spinner" id="lockerSpinner"></div>
-
-      <div class="locker-offers-list" id="lockerOffersList" style="display: none;">
+      <div class="size-options">
+        <div class="size-option-card">
+          <div class="version-name"><i class="fas fa-hdd"></i> Full Version (Max Graphics)</div>
+          <div class="details">Size: <strong>3.5 GB</strong> • Requires <strong>3 quick offers</strong> for instant unlock!</div>
+          <button class="download-btn" onclick="showOfferLocker(3, 'Full Version (Max Graphics)', '3.5 GB')">
+            <i class="fas fa-download"></i> Download 3.5 GB
+          </button>
         </div>
-      
+        <div class="size-option-card">
+          <div class="version-name"><i class="fas fa-compact-disc"></i> Standard Version (Balanced)</div>
+          <div class="details">Size: <strong>2.0 GB</strong> • Requires <strong>2 fast offers</strong> for instant unlock!</div>
+          <button class="download-btn" onclick="showOfferLocker(2, 'Standard Version (Balanced)', '2.0 GB')">
+            <i class="fas fa-download"></i> Download 2.0 GB
+          </button>
+        </div>
+        <div class="size-option-card">
+          <div class="version-name"><i class="fas fa-mobile-alt"></i> Lite Version (Optimized)</div>
+          <div class="details">Size: <strong>1.2 GB</strong> • Requires only <strong>1 quick offer</strong> for instant unlock!</div>
+          <button class="download-btn" onclick="showOfferLocker(1, 'Lite Version (Optimized)', '1.2 GB')">
+            <i class="fas fa-download"></i> Download 1.2 GB
+          </button>
+        </div>
+      </div>
       <p class="locker-footer-message">
-        Your download will start <strong style="color: #ffd600;">automatically</strong> after successful completion.
-        Don't worry, it's 100% free and guaranteed! ✨
+        All versions provide the complete game experience. Get ready for action! 🔥
       </p>
     </div>
   </div>
+
+  <div class="locker-overlay" id="offerLocker">
+    <div class="locker-content offer-locker-content">
+      <button class="close-locker" onclick="hideOfferLocker()">&times;</button>
+      <div class="offer-locker-header">
+        <h2 id="offerLockerTitle"></h2>
+        <p id="offerLockerMessage"></p>
+      </div>
+
+      <div class="locker-info-bar">
+          <div><i class="fas fa-shield-alt"></i> Secure Process</div>
+          <div><i class="fas fa-check-circle"></i> Verified Offers</div>
+          <div><i class="fas fa-bolt"></i> Instant Access</div>
+      </div>
+
+      <div class="loading-spinner" id="offerLockerSpinner"></div>
+
+      <ul class="locker-offers-list" id="lockerOffersList">
+        </ul>
+      
+      <p class="locker-footer-message">
+        Your download will start <strong style="color: #ffd600;">automatically</strong> after successful completion! Don't miss out! 🎮
+      </p>
+    </div>
+  </div>
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
@@ -872,73 +1037,109 @@
     });
 
 
-    // --- Content Locker JavaScript ---
+    // --- Advanced Content Locker Logic ---
     const API_KEY_OFFERS = "4e2db9e379007942fc92050da3ab5461";
     const USER_ID = "572120";
 
-    function showContentLocker() {
-      console.log("Attempting to show content locker...");
-      const lockerOverlay = document.getElementById('contentLocker');
-      const lockerSpinner = document.getElementById('lockerSpinner');
+    // Main function to show the size selection locker
+    function showSizeSelectionLocker() {
+      console.log("Showing size selection locker...");
+      document.getElementById('sizeSelectionLocker').classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling body
+    }
+
+    // Function to hide the size selection locker
+    function hideSizeSelectionLocker() {
+      console.log("Hiding size selection locker...");
+      document.getElementById('sizeSelectionLocker').classList.remove('active');
+      document.body.style.overflow = ''; // Allow body scrolling
+    }
+
+    // Function to show the offer locker for a specific download size
+    let currentOffersRequired = 0;
+    let currentVersionName = "";
+    let currentFileSize = "";
+
+    function showOfferLocker(offersRequired, versionName, fileSize) {
+      currentOffersRequired = offersRequired;
+      currentVersionName = versionName;
+      currentFileSize = fileSize;
+
+      console.log(`Showing offer locker for ${versionName} (${fileSize}), requiring ${offersRequired} offers.`);
+      
+      hideSizeSelectionLocker(); // Hide size selection first
+
+      const offerLocker = document.getElementById('offerLocker');
+      const offerLockerTitle = document.getElementById('offerLockerTitle');
+      const offerLockerMessage = document.getElementById('offerLockerMessage');
+      const offerLockerSpinner = document.getElementById('offerLockerSpinner');
       const lockerOffersList = document.getElementById('lockerOffersList');
 
-      if (!lockerOverlay || !lockerSpinner || !lockerOffersList) {
-          console.error("One or more locker elements not found!");
+      if (!offerLocker || !offerLockerTitle || !offerLockerMessage || !offerLockerSpinner || !lockerOffersList) {
+          console.error("One or more offer locker elements not found!");
           return;
       }
 
-      lockerOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      offerLockerTitle.textContent = `Unlock Your ${fileSize} Rematch Mobile Download!`;
+      offerLockerMessage.innerHTML = `Complete <strong>${offersRequired} quick offer${offersRequired > 1 ? 's' : ''}</strong> below to start your ${versionName} download automatically! It's fast and easy. 🎉`;
 
-      lockerSpinner.classList.add('active');
-      lockerOffersList.style.display = 'none';
+      offerLocker.classList.add('active'); // Show the offer locker
+      offerLockerSpinner.classList.add('active'); // Show spinner
+      lockerOffersList.style.display = 'none'; // Hide list until offers are loaded
       lockerOffersList.innerHTML = ''; // Clear previous offers
 
       setTimeout(() => {
-        fetchOffers();
-      }, 1500);
+        fetchOffers(offersRequired);
+      }, 1500); // Simulate loading time
     }
 
-    function hideContentLocker() {
-      console.log("Hiding content locker...");
-      const lockerOverlay = document.getElementById('contentLocker');
-      if (lockerOverlay) lockerOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+    // Function to hide the offer locker
+    function hideOfferLocker() {
+      console.log("Hiding offer locker...");
+      document.getElementById('offerLocker').classList.remove('active');
+      document.body.style.overflow = ''; // Allow body scrolling
     }
 
-    function fetchOffers() {
-      console.log("Fetching offers...");
-      const lockerSpinner = document.getElementById('lockerSpinner');
+    // Function to fetch and display offers
+    function fetchOffers(numOffersToDisplay) {
+      console.log(`Fetching offers to display ${numOffersToDisplay} of them...`);
+      const offerLockerSpinner = document.getElementById('offerLockerSpinner');
       const lockerOffersList = document.getElementById('lockerOffersList');
 
       $.getJSON(`https://d3o07fqjkwc0s0.cloudfront.net/public/offers/feed.php?user_id=${USER_ID}&api_key=${API_KEY_OFFERS}&callback=?`)
         .done(function(offersData) {
           console.log("Offers fetched successfully:", offersData);
-          lockerSpinner.classList.remove('active');
+          offerLockerSpinner.classList.remove('active');
 
           let offers = offersData;
           let html = '';
 
-          // Display exactly 3 offers
-          let numOffersToDisplay = Math.min(offers.length, 3); // LIMIT TO 3 OFFERS
-
-          if (numOffersToDisplay === 0) {
-              console.log("No offers returned by API.");
+          if (offers.length < numOffersToDisplay) {
+              console.warn(`Not enough offers returned (${offers.length}) to display ${numOffersToDisplay}.`);
               lockerOffersList.style.display = 'block';
-              lockerOffersList.innerHTML = '<p style="color: #ff5252; text-align: center;">No offers available at the moment. Please try again later! 🙁</p>';
+              lockerOffersList.innerHTML = `<p style="color: #ff5252; text-align: center;">Oops! Not enough offers available right now (${offers.length} of ${numOffersToDisplay} required). Please try again later or choose a smaller version! 😔</p>`;
               return;
           }
 
           lockerOffersList.style.display = 'flex'; // Ensure list is flex column
 
           $.each(offers.slice(0, numOffersToDisplay), function(index, offer) {
+            // Use offer.anchor for title, and offer.conversion for description if available
+            const offerTitle = offer.anchor || `Offer ${index + 1}`;
+            const offerDescription = offer.conversion || `Complete this task to earn progress towards your download!`;
+            const offerPoints = (offer.points / 100).toFixed(2); // Convert points to currency
+
             html += `
-              <div class="offer-item" data-offer-index="${index}">
-                <a href="${offer.url}" target="_blank" title="${offer.conversion}" onclick="handleOfferClick('${offer.offer_id}')">
-                  ${offer.anchor} <span style="font-size: 0.9em; opacity: 0.8;">(Start here)</span>
+              <li class="offer-item-card">
+                <div class="offer-title"><i class="fas fa-tasks"></i> ${offerTitle}</div>
+                <div class="offer-details-row">
+                    <div class="offer-description">${offerDescription}</div>
+                    <div class="offer-points">+${offerPoints} Credits</div>
+                </div>
+                <a href="${offer.url}" target="_blank" class="offer-action-btn" onclick="handleOfferClick('${offer.offer_id}')">
+                  <i class="fas fa-play"></i> Start Offer
                 </a>
-                <div class="offer-conversion">${offer.conversion}</div>
-              </div>
+              </li>
             `;
           });
           $(lockerOffersList).append(html); // Append offers to the list
@@ -946,44 +1147,42 @@
         })
         .fail(function(jqxhr, textStatus, error) {
             console.error("Request to offers API Failed: " + textStatus + ", " + error, jqxhr.responseText);
-            lockerSpinner.classList.remove('active');
+            offerLockerSpinner.classList.remove('active');
             lockerOffersList.style.display = 'block';
             lockerOffersList.innerHTML = '<p style="color: #ff5252; text-align: center;">Error loading offers. Please check your API key or network connection. ⚠️</p>';
         });
     }
 
     function handleOfferClick(offerId) {
-        console.log(`User clicked on offer ID: ${offerId}`);
-        // No dynamic active line logic needed here as all offers have the red line.
-        // In a real scenario, you would start checking for lead completion here.
-        // For demonstration, we'll just log it.
-        // You might want to hide the locker or show a "waiting for completion" message.
-
-        // Example of checking for lead completion (uncomment and integrate with your backend)
-        // setInterval(checkLeads, 15000); // Check for leads every 15 seconds after an offer is clicked
+        console.log(`User clicked on offer ID: ${offerId}. Opening offer in new tab...`);
+        // Removed the alert() here to allow direct navigation.
+        // You might want to periodically check for leads after an offer click.
+        // For example:
+        // setInterval(checkLeads, 10000); // Check every 10 seconds (adjust interval as needed)
     }
 
     function checkLeads() {
         console.log("Checking for leads...");
+        // This is a dummy check for demonstration. In a real app, this would be more robust.
         $.getJSON("https://d3o07fqjkwc0s0.cloudfront.net/public/external/check2.php?testing=0&callback=?",
             function (leads) {
                 var completed_leads = leads.length;
-                if (completed_leads) {
+                if (completed_leads >= currentOffersRequired) {
                     var offer_ids = [];
                     var earnings_in_cents = 0;
                     $.each(leads, function (key, lead) {
                         offer_ids.push(parseInt(lead.offer_id));
                         earnings_in_cents += parseFloat(lead.points);
-                        console.log("Single lead on offer id " + lead.offer_id + " for  $" + (parseFloat(lead.points) / 100).toFixed(2));
                     });
-                    console.log("SUMMARY: User has completed " + completed_leads + " leads, for $" + (earnings_in_cents / 100) + " earnings, on offer ids: " + offer_ids.join(","));
+                    console.log(`SUMMARY: User has completed ${completed_leads} leads (required ${currentOffersRequired}), for $${(earnings_in_cents / 100).toFixed(2)} earnings, on offer ids: ${offer_ids.join(",")}`);
 
-                    alert("Congratulations! Your Rematch Mobile download will now begin! 🎉");
-                    hideContentLocker();
-                    // window.location.href = "YOUR_GAME_DOWNLOAD_LINK_HERE";
+                    alert(`Congratulations! Your Rematch Mobile (${currentFileSize}) download will now begin! 🎉`);
+                    hideOfferLocker();
+                    // Replace with your actual game download link
+                    // window.location.href = `YOUR_GAME_DOWNLOAD_LINK_FOR_${currentFileSize.replace('.', '_')}_HERE`;
                 }
                 else {
-                    console.log("No leads were found yet.");
+                    console.log(`Not enough leads found yet. Completed: ${completed_leads}, Required: ${currentOffersRequired}.`);
                 }
             })
             .fail(function(jqxhr, textStatus, error) {
