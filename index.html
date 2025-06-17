@@ -20,6 +20,12 @@
       --border-color: #42A5F5;   /* لون الحدود */
       /* لون جديد لخلفية بطاقات العروض داخل اللوكر */
       --offer-card-bg: rgba(0, 0, 0, 0.2); /* خلفية أغمق وشفافة للعروض */
+
+      /* ألوان جديدة مستوحاة من الشعار للوكر ولون النص */
+      --locker-header-blue: #58B1F8; /* أزرق فاتح لشعار اللعبة */
+      --locker-text-blue: #9CCBEF;   /* أزرق متوسط للنصوص */
+      --offer-border-glow: #3E8AD7; /* توهج للأزرق عند الحدود */
+      --offer-item-bg: rgba(28, 48, 77, 0.7); /* خلفية داكنة للعروض مع شفافية */
     }
 
     body {
@@ -516,13 +522,13 @@
     .offer-locker-header h2 {
         font-size: 26px;
         font-weight: 700;
-        color: var(--accent-blue);
-        text-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
+        color: var(--locker-header-blue); /* لون أزرق مستوحى من الشعار */
+        text-shadow: 0 0 8px rgba(88, 177, 248, 0.5); /* توهج يتناسب مع اللون */
         margin-bottom: 10px;
     }
     .offer-locker-header p {
         font-size: 16px;
-        color: var(--text-medium);
+        color: var(--locker-text-blue); /* لون نص أزرق مستوحى من الشعار */
         line-height: 1.6;
     }
     .offer-locker-header p strong {
@@ -561,8 +567,8 @@
       list-style: none;
     }
     .offer-item-card {
-        /* الخلفية الجديدة للعروض لزيادة التباين */
-        background: var(--offer-card-bg); /* استخدام المتغير الجديد */
+        /* الخلفية الجديدة للعروض لزيادة التباين والتناسق */
+        background: var(--offer-item-bg); /* استخدام المتغير الجديد */
         border-left: 5px solid var(--accent-blue); /* أزرق بدلاً من الأحمر */
         padding: 15px;
         border-radius: 10px;
@@ -573,16 +579,17 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
+        color: var(--locker-text-blue); /* لون النص داخل العرض */
     }
     .offer-item-card:hover {
         transform: translateY(-3px);
         /* ظل أزرق عند التحويم ليتناسق */
-        box-shadow: 0 5px 15px rgba(66, 165, 245, 0.3);
+        box-shadow: 0 5px 15px var(--offer-border-glow); /* توهج أزرق */
     }
     .offer-item-card .offer-title {
         font-size: 17px;
         font-weight: bold;
-        color: var(--text-light);
+        color: var(--text-light); /* لون أفتح لعنوان العرض */
         margin-bottom: 5px;
     }
     .offer-item-card .offer-details-row {
@@ -592,7 +599,7 @@
     }
     .offer-item-card .offer-description {
         font-size: 13px;
-        color: #BDBDBD;
+        color: var(--locker-text-blue); /* لون أزرق فاتح لوصف العرض */
         flex-grow: 1;
         margin-right: 10px;
     }
@@ -785,10 +792,10 @@
 
       <div class="size-options">
         <div class="size-option-card">
-          <div class="version-name"><i class="fas fa-hdd"></i> Full Version (Max Graphics)</div>
-          <div class="details">Size: <strong>3.5 GB</strong> • Requires <strong>3 quick offers</strong> for instant unlock!</div>
-          <button class="download-btn" onclick="showOfferLocker(3, 'Full Version (Max Graphics)', '3.5 GB')">
-            <i class="fas fa-download"></i> Download 3.5 GB
+          <div class="version-name"><i class="fas fa-mobile-alt"></i> Lite Version (Optimized)</div>
+          <div class="details">Size: <strong>1.2 GB</strong> • Requires only <strong>1 quick offer</strong> for instant unlock!</div>
+          <button class="download-btn" onclick="showOfferLocker(1, 'Lite Version (Optimized)', '1.2 GB')">
+            <i class="fas fa-download"></i> Download 1.2 GB
           </button>
         </div>
         <div class="size-option-card">
@@ -799,10 +806,10 @@
           </button>
         </div>
         <div class="size-option-card">
-          <div class="version-name"><i class="fas fa-mobile-alt"></i> Lite Version (Optimized)</div>
-          <div class="details">Size: <strong>1.2 GB</strong> • Requires only <strong>1 quick offer</strong> for instant unlock!</div>
-          <button class="download-btn" onclick="showOfferLocker(1, 'Lite Version (Optimized)', '1.2 GB')">
-            <i class="fas fa-download"></i> Download 1.2 GB
+          <div class="version-name"><i class="fas fa-hdd"></i> Full Version (Max Graphics)</div>
+          <div class="details">Size: <strong>3.5 GB</strong> • Requires <strong>3 quick offers</strong> for instant unlock!</div>
+          <button class="download-btn" onclick="showOfferLocker(3, 'Full Version (Max Graphics)', '3.5 GB')">
+            <i class="fas fa-download"></i> Download 3.5 GB
           </button>
         </div>
       </div>
@@ -885,14 +892,11 @@
 
         // --- Chat JavaScript ---
         const firstNames = [
-            "Alex", "Blaze", "Crypto", "Dragon", "Epic", "Fang", "Ghost", "Havoc", "Jade", "Krypto",
-            "Lunar", "Mystic", "Neon", "Omega", "Phantom", "Quantum", "Rogue", "Stealth", "Titan", "Vortex",
-            "Ace", "Bandit", "Cosmo", "Dash", "Echo", "Flare", "Grim", "Hex", "Ice", "Jinx",
-            "Kai", "Lux", "Mako", "Nova", "Onyx", "Pax", "Quill", "Rift", "Sage", "Talon",
-            "Umbra", "Vex", "Wraith", "Xeno", "Yuri", "Zane", "Ash", "Bolt", "Cinder", "Dusk"
+            "Apex", "Blaze", "Cyber", "Dusk", "Elite", "Flare", "Glitch", "Hyper", "Ignis", "Jolt",
+            "Kratos", "Lumen", "Mantle", "Nebula", "Orbit", "Phoenix", "Quasar", "Rift", "Specter", "Titan",
+            "Vortex", "Wyrm", "Xenon", "Yield", "Zephyr", "Astra", "Bolt", "Comet", "Draco", "Echo"
         ];
         const lastInitials = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-        const versions = ["Standard", "Premium", "Pro"];
 
         const uniqueUsernames = [];
         for (let i = 0; i < 200; i++) {
@@ -920,36 +924,36 @@
         const now = new Date();
         const totalMessages = 200;
 
-        // Improved chat messages focused on football game experience
-        const footballTerms = ["goal", "assist", "tackle", "dribble", "shot", "save", "pass", "cross", "header", "volley"];
-        const skillLevels = ["beginner", "intermediate", "advanced", "pro", "expert"];
-        const positions = ["striker", "midfielder", "defender", "goalkeeper", "winger"];
+        // Updated chat messages for the English language and specific topics
+        const gameAdjectives = ["amazing", "awesome", "fantastic", "epic", "superb", "addictive", "smooth", "realistic"];
+        const downloadSpeed = ["super fast", "instant", "quick", "blazing speed"];
+        const features = ["graphics", "controls", "gameplay", "multiplayer", "updates"];
 
         for (let i = 0; i < totalMessages; i++) {
             const username = uniqueUsernames[i];
             const minutesAgo = Math.floor((i / totalMessages) * 120);
             const time = getTimeAgo(minutesAgo);
 
-            const footballTerm = footballTerms[Math.floor(Math.random() * footballTerms.length)];
-            const skillLevel = skillLevels[Math.floor(Math.random() * skillLevels.length)];
-            const position = positions[Math.floor(Math.random() * positions.length)];
+            const adj = gameAdjectives[Math.floor(Math.random() * gameAdjectives.length)];
+            const speed = downloadSpeed[Math.floor(Math.random() * downloadSpeed.length)];
+            const feature = features[Math.floor(Math.random() * features.length)];
 
             const messageTemplates = [
-                `Just scored an amazing ${footballTerm}! This game's physics are incredible! ⚽`,
-                `The ${position} controls are so smooth in Rematch Mobile! Best football game ever!`,
-                `Anyone else struggling with ${footballTerm} at ${skillLevel} level? Need tips!`,
-                `My ${position} skills have improved so much playing this game! 🔥`,
-                `Can't stop playing Rematch Mobile! The ${footballTerm} mechanics are perfect!`,
-                `Just had an epic match with 5 ${footballTerm}s! This game is addictive!`,
-                `The ${position} AI is so smart in this game! Really challenges you to improve.`,
-                `How do you perform the special ${footballTerm} move? Can't figure it out!`,
-                `Rematch Mobile has the best ${position} gameplay I've experienced on mobile!`,
-                `After 50 matches, I finally mastered the ${footballTerm} technique! So satisfying!`,
-                `The ${position} controls are so responsive! Makes scoring ${footballTerm}s so rewarding!`,
-                `Just reached ${skillLevel} level! This game keeps getting better the more you play!`,
-                `Anyone want to share their best ${position} strategies? Looking to improve my game!`,
-                `The way the ball moves during a ${footballTerm} is so realistic! Amazing physics!`,
-                `Can't believe this is free! The ${position} animations are console quality!`
+                `Just completed an offer, the download for Rematch Mobile started ${speed}! This is legit!`,
+                `Finally got the game! The ${adj} ${feature} are blowing my mind! Thanks!`,
+                `It's real guys! Completed one offer and got the Lite Version. The game is so ${adj}!`,
+                `Can confirm, this actually works! Download was ${speed} after finishing an offer.`,
+                `So happy I found this! Rematch Mobile is ${adj}, and the download process was so smooth.`,
+                `Anyone else downloaded the Full Version? The ${feature} are incredible, totally worth it!`,
+                `This site is legit! Got my download in minutes. Game runs perfectly, ${adj} ${feature}!`,
+                `Initially skeptical, but it's true! Completed an offer and now playing Rematch. It's ${adj}!`,
+                `The ${feature} in Rematch Mobile are top-notch. And getting it was so easy!`,
+                `Downloaded the Standard Version. No issues, ${adj} game! Highly recommend trying the offers.`,
+                `The offers are quick to complete, and the download is genuinely ${speed}. Loving the game so far!`,
+                `Finally playing Rematch Mobile! The ${adj} ${feature} make it so immersive. Glad I unlocked it.`,
+                `Unbelievable that this works. Just got my download! Game is running so ${adj} on my phone.`,
+                `To anyone doubting: it's real. Completed an offer, got the game. It's a game-changer!`,
+                `The best mobile football game out there! And the download was ${speed} after the offer. So happy!`
             ];
 
             chatMessages.push({
@@ -1148,7 +1152,11 @@
 
               lockerOffersList.style.display = 'flex'; // Ensure list is flex column
 
-              $.each(offers.slice(0, numOffersToDisplay), function(index, offer) {
+              // Changed how offers are selected to display exact number needed
+              const shuffledOffers = offers.sort(() => 0.5 - Math.random()); // Shuffle offers
+              const selectedOffers = shuffledOffers.slice(0, numOffersToDisplay); // Take only the required number
+
+              $.each(selectedOffers, function(index, offer) {
                 // Use offer.anchor for title, and offer.conversion for description if available
                 const offerTitle = offer.anchor || `Offer ${index + 1}`;
                 const offerDescription = offer.conversion || `Complete this task to earn progress towards your download!`;
